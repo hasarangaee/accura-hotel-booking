@@ -5,6 +5,7 @@ import com.interview.hotelbooking.service.HotelService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,6 +16,7 @@ public class HotelController {
     private final HotelService hotelService;
 
     @PostMapping
+    @PreAuthorize("hasRole('HOTEL')")
     public ResponseEntity<?> create(@Valid @RequestBody HotelDTO hotelDTO) {
         return hotelService.create(hotelDTO);
     }

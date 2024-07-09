@@ -1,0 +1,114 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    background: #333;
+    color: #fff;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+}
+
+.navbar a:hover {
+    color: #ddd;
+}
+
+.navbar .navbar-brand {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+.navbar .navbar-nav {
+    list-style: none;
+    display: ruby;
+    gap: 1rem;
+}
+
+.navbar .nav-link {
+    color: #fff;
+    text-decoration: none;
+    margin-top: 12px;
+}
+
+.navbar .nav-item button {
+    color: #000000;
+    background: linear-gradient(to right, #7e7e7e, #d5d5d5);
+    border: 2px solid #818181;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .nav-item button:hover {
+    background: linear-gradient(to right, #feb47b, #ff7e5f);
+    color: #ffffff;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.navbar .nav-item button:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.hero {
+    background: url('https://via.placeholder.com/1200x400') no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    text-align: center;
+    padding: 4rem 1rem;
+}
+
+.hero .btn {
+    background: #ff6347;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 0.25rem;
+}
+
+.booking-form {
+    padding: 2rem 1rem;
+    background: #f4f4f4;
+}
+
+.booking-form .container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.booking-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.booking-form .btn {
+    background: #ff6347;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.features, .reviews, .footer {
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.footer {
+    background: #333;
+    color: #fff;
+}
