@@ -6,6 +6,8 @@ import lombok.Data;
 
 @Data
 public class HotelDTO {
+    private Long id;
+
     @NotNull
     @NotBlank
     private String name;

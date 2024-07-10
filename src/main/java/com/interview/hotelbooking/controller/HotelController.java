@@ -25,4 +25,20 @@ public class HotelController {
     public ResponseEntity<?> search(@RequestParam String location, @RequestParam double review) {
         return hotelService.search(location, review);
     }
+
+    @GetMapping("/me")
+    @PreAuthorize("hasRole('HOTEL')")
+    public ResponseEntity<?> getMyHotels() {
+        return hotelService.getMyHotels();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id) {
+        return hotelService.getById(id);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<?> getAll() {
+        return hotelService.getAll();
+    }
 }

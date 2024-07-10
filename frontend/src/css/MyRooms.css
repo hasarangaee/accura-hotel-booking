@@ -1,0 +1,35 @@
+.room {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.room-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.room-form input {
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.room-details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.room-details p {
+    margin: 0;
+}
+
+.room button {
+    margin-left: 10px;
+}
+
+.error {
+    color: red;
+    margin-top: 10px;
+}

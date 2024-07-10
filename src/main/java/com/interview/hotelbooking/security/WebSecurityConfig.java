@@ -66,7 +66,11 @@ public class WebSecurityConfig {
                         exceptionHandling.authenticationEntryPoint(unauthorizedHandler))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/interview/api/auth/**").permitAll()
+
+                        .requestMatchers("/interview/api/hotel/**").permitAll()
+                        .requestMatchers("/interview/api/room/all/**").permitAll()
                         .requestMatchers("/interview/api/booking/**").permitAll()
+
                         .anyRequest().authenticated()
                 );
 

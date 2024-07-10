@@ -1,31 +1,39 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../services/auth/Auth.service';
-import {useAuth} from '../contexts/AuthContext';
+import '../css/Signup.css';
 
-import '../css/Login.css';
-
-const Login = () => {
+const Signup = () => {
+    const [name, setName] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
-    const { dispatch } = useAuth();
 
-    const handleLogin = async (e) => {
+    const handleSignup = async (e) => {
         e.preventDefault();
         try {
-            await AuthService.login(username, password, dispatch);
-            navigate('/dashboard');
+            await AuthService.register(name, username, password);
+            navigate('/login');
         } catch (error) {
-            setError('Invalid username or password');
+            setError('Failed to sign up. Please try again.');
         }
     };
 
     return (
-        <div className="login-container">
-            <h2>Login (System Admin / Hotel Admin)</h2>
-            <form onSubmit={handleLogin} className="form">
+        <div className="signup-container">
+            <h2>Sign Up</h2>
+            <form onSubmit={handleSignup} className="form">
+                <div className="form-group">
+                    <label className="label">Name</label>
+                    <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="input"
+                        required
+                    />
+                </div>
                 <div className="form-group">
                     <label className="label">Username</label>
                     <input
@@ -33,6 +41,7 @@ const Login = () => {
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         className="input"
+                        required
                     />
                 </div>
                 <div className="form-group">
@@ -42,19 +51,16 @@ const Login = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         className="input"
+                        required
                     />
                 </div>
                 {error && <p className="error">{error}</p>}
-                <button type="submit" className="button">Login</button>
+                <button type="submit" className="button">Sign Up</button>
             </form>
-            <h3>This login is for System Admin or Hotel Admin.</h3>
+            <h3>This registration for Hotel Admin.</h3>
             <p><strong>Hotel Admin:</strong> Can add, update, delete, and manage rooms, and view bookings.</p>
-            <br/>
-            <p><strong>System Admin:</strong> Can view all hotels and booking details.</p>
-            <p><strong>System Admin Username:</strong> admin</p>
-            <p><strong>System Admin Password:</strong> admin</p>
         </div>
     );
 };
 
-export default Login;
+export default Signup;

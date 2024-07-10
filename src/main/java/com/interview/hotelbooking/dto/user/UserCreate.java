@@ -15,6 +15,8 @@ public class UserCreate {
     @NotBlank
     private String username, password;
 
+    private String name;
+
     @NotNull
     private Set<String> role;
 

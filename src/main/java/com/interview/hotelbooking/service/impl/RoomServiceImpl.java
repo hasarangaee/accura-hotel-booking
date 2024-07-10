@@ -44,10 +44,17 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public ResponseEntity<?> getAll() {
+    public ResponseEntity<?> getAll(long id) {
         DataResponse response = new DataResponse();
-        response.setData(modelMapper.map(roomRepository.findAll(), new TypeToken<List<RoomDTO>>() {
+        response.setData(modelMapper.map(roomRepository.findAllByHotelId(id), new TypeToken<List<RoomDTO>>() {
         }.getType()));
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> getById(long id) {
+        DataResponse response = new DataResponse();
+        response.setData(modelMapper.map(roomRepository.findById(id), RoomDTO.class));
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

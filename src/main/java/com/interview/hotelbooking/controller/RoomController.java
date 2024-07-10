@@ -21,9 +21,14 @@ public class RoomController {
         return roomService.create(dto);
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<?> getAll() {
-        return roomService.getAll();
+    @GetMapping("/all/{id}")
+    public ResponseEntity<?> getAll(@PathVariable long id) {
+        return roomService.getAll(id);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable long id) {
+        return roomService.getById(id);
     }
 
     @GetMapping("/search/{number}")

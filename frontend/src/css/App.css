@@ -39,12 +39,25 @@ body {
     margin-top: 12px;
 }
 
+.navbar .nav-item-link {
+    color: #000000;
+    border-left: 3px solid #959595;
+    /*border-radius: 0px;*/
+    /*padding: 5px 10px;*/
+    /*margin-right: 5px;*/
+    font-size: 16px;
+    /*font-weight: bold;*/
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
 .navbar .nav-item button {
     color: #000000;
     background: linear-gradient(to right, #7e7e7e, #d5d5d5);
     border: 2px solid #818181;
     border-radius: 25px;
-    padding: 10px 20px;
+    padding: 8px 18px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;

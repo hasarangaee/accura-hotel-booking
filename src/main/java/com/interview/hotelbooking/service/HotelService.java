@@ -10,4 +10,10 @@ public interface HotelService {
     ResponseEntity<?> create(HotelDTO hotelDTO);
 
     ResponseEntity<?> search(String location, double review);
+
+    ResponseEntity<?> getAll();
+
+    ResponseEntity<?> getMyHotels();
+
+    ResponseEntity<?> getById(Long id);
 }

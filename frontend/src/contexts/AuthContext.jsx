@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useReducer, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, {createContext, useContext, useReducer, useEffect, useState} from 'react';
+import {useNavigate, useLocation} from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode';
 
 const AuthContext = createContext(undefined);
@@ -23,13 +23,17 @@ const authReducer = (state, action) => {
     }
 };
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ({children}) => {
     const navigate = useNavigate();
+    const currentLocation = useLocation();
     const [state, dispatch] = useReducer(authReducer, {
         user: null,
         isAuthenticated: false,
     });
     const [loading, setLoading] = useState(true);
+
+    const publicRoutes = ['/login', '/signup', '/public', '/public/*'];
+    const isPublicRoute = publicRoutes.some(route => currentLocation.pathname.startsWith(route));
 
     useEffect(() => {
         const authenticate = () => {
@@ -40,10 +44,12 @@ export const AuthProvider = ({ children }) => {
                 const roles = decodedToken.roles.map(role => role.authority);
                 parsedUser.roles = roles || [];
                 if (!state.isAuthenticated || state.user === null) {
-                    dispatch({ type: 'LOGIN', payload: { user: parsedUser } });
+                    dispatch({type: 'LOGIN', payload: {user: parsedUser}});
                 }
             } else {
-                navigate('/login');
+                if (!isPublicRoute) {
+                    navigate('/login');
+                }
             }
             setLoading(false);
         };
@@ -52,7 +58,7 @@ export const AuthProvider = ({ children }) => {
     }, [navigate, state.isAuthenticated, state.user]);
 
     useEffect(() => {
-        if (!loading && !state.isAuthenticated) {
+        if (!loading && !state.isAuthenticated && !isPublicRoute) {
             navigate('/login');
         }
     }, [loading, state.isAuthenticated, navigate]);
@@ -62,7 +68,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ state, dispatch, hasRole}}>
+        <AuthContext.Provider value={{state, dispatch, hasRole}}>
             {!loading && children}
         </AuthContext.Provider>
     );

@@ -1,19 +1,17 @@
 import axios from 'axios';
-import { API_ROUTES } from '../../constants/api/BackendApi';
+import {API_ROUTES} from '../../constants/api/BackendApi';
 
 const AuthService = {
 
-    register: async (name, email, password, role = "hotel") => {
+    register: async (name, username, password) => {
         const user = {
             name: name,
-            username: name,
-            password: email,
-            role: [role]
+            username: username,
+            password: password,
+            role: ["hotel"]
         }
         try {
-            const response = await axios.post(API_ROUTES.SIGN_UP + role, user);
-
-            return response;
+            return await axios.post(API_ROUTES.SIGN_UP, user);
         } catch (error) {
         }
     },

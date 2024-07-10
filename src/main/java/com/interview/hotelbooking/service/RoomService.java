@@ -9,11 +9,13 @@ public interface RoomService {
 
     ResponseEntity<?> create(RoomDTO dto);
 
-    ResponseEntity<?> getAll();
+    ResponseEntity<?> getAll(long id);
 
     ResponseEntity<?> search(int number);
 
     ResponseEntity<?> update(RoomDTO dto);
 
     ResponseEntity<?> delete(long id);
+
+    ResponseEntity<?> getById(long id);
 }

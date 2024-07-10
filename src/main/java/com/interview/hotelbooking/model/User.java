@@ -39,4 +39,7 @@ public class User implements Serializable {
             joinColumns = @JoinColumn(name = "fk_idUser"),
             inverseJoinColumns = @JoinColumn(name = "fk_idRole"))
     private Set<Role> roles = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<Hotel> hotels = new HashSet<>();
 }
