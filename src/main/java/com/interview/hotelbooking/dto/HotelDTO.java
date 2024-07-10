@@ -18,4 +18,7 @@ public class HotelDTO {
 
     @NotNull
     private double review;
+
+    private int totalRooms;
+    private int availableRooms;
 }

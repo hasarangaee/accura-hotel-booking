@@ -5,6 +5,7 @@ import com.interview.hotelbooking.dto.RoomDTO;
 import com.interview.hotelbooking.dto.response.DataResponse;
 import com.interview.hotelbooking.model.Hotel;
 import com.interview.hotelbooking.repository.HotelRepository;
+import com.interview.hotelbooking.repository.RoomRepository;
 import com.interview.hotelbooking.service.CurrentUser;
 import com.interview.hotelbooking.service.HotelService;
 import com.interview.hotelbooking.utils.ResponseUtils;
@@ -16,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,6 +26,7 @@ import java.util.List;
 public class HotelServiceImpl implements HotelService {
 
     private final HotelRepository hotelRepository;
+    private final RoomRepository roomRepository;
     private final ModelMapper modelMapper;
     private final CurrentUser currentUser;
 
@@ -67,8 +70,17 @@ public class HotelServiceImpl implements HotelService {
     public ResponseEntity<?> getAll() {
         DataResponse dataResponse = new DataResponse();
         List<Hotel> hotels = hotelRepository.findAll();
-        dataResponse.setData(modelMapper.map(hotels, new TypeToken<List<HotelDTO>>() {
-        }.getType()));
+
+//            hotelDTO.setTotalRooms(hotel.getRooms().size()); // Not Good in this situation
+
+        List<HotelDTO> hotelDTO = hotels.stream()
+                .map(hotel -> {
+                    HotelDTO dto = modelMapper.map(hotel, HotelDTO.class);
+                    dto.setTotalRooms(roomRepository.countAllByHotel(hotel));
+                    dto.setAvailableRooms(roomRepository.countAllByHotelAndIsBookingFalse(hotel));
+                    return dto;
+                }).toList();
+        dataResponse.setData(hotelDTO);
         return new ResponseEntity<>(dataResponse, HttpStatus.OK);
     }
 }

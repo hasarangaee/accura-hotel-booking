@@ -14,7 +14,6 @@ const HotelCard = ({ hotel }) => {
             <h3>{hotel.name}</h3>
             <p>Total Rooms: {hotel.totalRooms}</p>
             <p>Available Rooms: {hotel.availableRooms}</p>
-            <p>Rating: {hotel.rating}</p>
             <button onClick={handleBookNow} className="btn">Book Now</button>
         </div>
     );
